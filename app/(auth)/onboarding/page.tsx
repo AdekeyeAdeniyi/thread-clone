@@ -1,7 +1,7 @@
 const page = () => {
   return (
     <div>
-      <h1>Onboarding</h1>
+      <h1 className="text-light-1">Onboarding</h1>
     </div>
   );
 };

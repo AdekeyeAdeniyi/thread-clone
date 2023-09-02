@@ -20,7 +20,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <html lang="en">
         <body className={inter.className}>
           <Topbar />
-          <main>
+          <main className="flex">
             <Leftsidebar />
             <section className="main-container">
               <div className="w-full mx-w-4xl">{children}</div>
