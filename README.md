@@ -48,7 +48,7 @@ Follow these steps to set up the Thread Clone Application locally:
 
    ```bash
    git clone <repository_url>
-   cd thread-clone-app
+   cd thread-clone
    ```
 
 2. Install dependencies
