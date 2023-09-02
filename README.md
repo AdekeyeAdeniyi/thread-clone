@@ -2,7 +2,7 @@
 
 Webite Link: [Thread Clone](https://adekeyeadeniyi.github.io/thread-clone)
 
-![Thread Logo]()
+![Thread Logo](https://github.com/AdekeyeAdeniyi/thread-clone/assets/57262658/977fdbaf-64c4-4474-b55b-160a2ba998af)
 
 This README provides detailed instructions and information on how to set up and develop a Fullstack Thread Clone Application using the following technologies and libraries:
 
