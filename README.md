@@ -1,6 +1,6 @@
 # Thread Web Application Clone - Fullstack Development
 
-Webite Link: [Thread Clone](https://adekeyeadeniyi.github.io/thread-clone)
+Website Link: [Thread Clone](https://adekeyeadeniyi.github.io/thread-clone)
 
 ![Thred-clone Logo](/thread-clone/public/assets/logo.svg)
 
