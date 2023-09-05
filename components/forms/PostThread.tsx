@@ -16,7 +16,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.action';
-// import { updateUser } from '@/lib/actions/user.action';
 
 const PostThread = ({ userId }: { userId: string }) => {
   const router = useRouter();
@@ -34,7 +33,7 @@ const PostThread = ({ userId }: { userId: string }) => {
     try {
       await createThread({
         text: values.thread,
-        author: userId,
+        author: JSON.parse(userId),
         communityId: null,
         path: pathname,
       });

@@ -29,7 +29,7 @@ interface UserParams {
 }
 interface ThreadParams {
   text: string;
-  author: string;
+  author: any;
   communityId: string | null;
   path: string;
 }
@@ -59,6 +59,21 @@ interface ThreadProps {
   isComment?: boolean;
 }
 
+interface CommentProps {
+  threadId: string;
+  currentUserImg: string;
+  currentUserId: string;
+}
+
+interface ProfileProps {
+  accountId: string;
+  authUserId: string;
+  name: string;
+  username: string;
+  imageUrl: string;
+  bio: string;
+}
+
 export type {
   SidebarValue,
   GroupValue,
@@ -66,4 +81,6 @@ export type {
   UserParams,
   ThreadParams,
   ThreadProps,
+  CommentProps,
+  ProfileProps,
 };

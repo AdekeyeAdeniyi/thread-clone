@@ -18,17 +18,19 @@ const Home = async () => {
         ) : (
           <>
             {threads.map((thread) => {
-              <ThreadCard
-                key={thread._id}
-                id={thread._id}
-                currentUserId={user?.id}
-                parentId={thread.parentId}
-                content={thread.text}
-                author={thread.author}
-                community={thread.community}
-                createdAt={thread.createdAt}
-                comments={thread.children}
-              />;
+              return (
+                <ThreadCard
+                  key={JSON.stringify(thread._id)}
+                  id={thread.id}
+                  currentUserId={user?.id}
+                  parentId={thread.parentId}
+                  content={thread.text}
+                  author={thread.author}
+                  community={thread.community}
+                  createdAt={thread.createdAt}
+                  comments={thread.children}
+                />
+              );
             })}
           </>
         )}
