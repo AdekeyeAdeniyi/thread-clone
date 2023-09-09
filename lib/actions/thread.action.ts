@@ -23,7 +23,7 @@ const createThread = async ({
 
     // Update user model
     await User.findByIdAndUpdate(author, {
-      $push: { thread: creatThread._id },
+      $push: { threads: creatThread._id },
     });
 
     revalidatePath(path);
@@ -100,7 +100,6 @@ const fetchThreadsById = async (id: string) => {
         ],
       })
       .exec();
-
     return thread;
   } catch (error: any) {
     throw new Error(`Error fetching thread: ${error.message}`);

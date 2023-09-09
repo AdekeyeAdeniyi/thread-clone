@@ -35,6 +35,7 @@ interface ThreadParams {
 }
 
 interface ThreadProps {
+  _id?: string;
   key: string;
   id: string;
   currentUserId?: string;
@@ -73,6 +74,11 @@ interface ProfileProps {
   imageUrl: string;
   bio: string;
 }
+interface ThreadTabProps {
+  currentUserId: string;
+  accountId: string;
+  accountType: string;
+}
 
 export type {
   SidebarValue,
@@ -83,4 +89,5 @@ export type {
   ThreadProps,
   CommentProps,
   ProfileProps,
+  ThreadTabProps,
 };
