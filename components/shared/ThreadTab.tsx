@@ -8,7 +8,7 @@ const ThreadTab = async ({
   accountId,
   accountType,
 }: ThreadTabProps) => {
-  const threads = await fetchUserThreads(currentUserId);
+  const threads = await fetchUserThreads(accountId);
 
   if (!threads) redirect('/');
 
@@ -19,7 +19,7 @@ const ThreadTab = async ({
           <ThreadCard
             key={thread._id}
             id={thread.id}
-            currentUserId={currentUserId}
+            currentUserId={accountId}
             parentId={thread.parentId}
             content={thread.text}
             author={

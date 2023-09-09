@@ -3,9 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { useAuth } from '@clerk/nextjs';
 
 const Navigation = ({ linkClass = '', textClass = '' }) => {
   const pathname = usePathname();
+  const { userId } = useAuth();
+
   return (
     <>
       {sidebarLinks.map((link) => {
@@ -16,7 +19,7 @@ const Navigation = ({ linkClass = '', textClass = '' }) => {
 
         return (
           <Link
-            href={route}
+            href={route == '/profile' ? `${route}/${userId}` : route}
             key={label}
             className={`${linkClass} ${isActive && 'bg-primary-500'}`}
           >

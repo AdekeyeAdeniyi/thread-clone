@@ -80,6 +80,15 @@ interface ThreadTabProps {
   accountType: string;
 }
 
+interface UserCardProps {
+  key: string;
+  id: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  personType: string;
+}
+
 export type {
   SidebarValue,
   GroupValue,
@@ -90,4 +99,5 @@ export type {
   CommentProps,
   ProfileProps,
   ThreadTabProps,
+  UserCardProps,
 };
