@@ -34,7 +34,7 @@ type Event = {
   type: EventType;
 };
 
-async function POST(request: Request) {
+export const POST = async (request: Request) => {
   const payload = await request.json();
   const header = headers();
 
@@ -207,4 +207,4 @@ async function POST(request: Request) {
   //     );
   //   }
   // }
-}
+};
