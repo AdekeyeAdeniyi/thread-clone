@@ -1,7 +1,6 @@
 'use client';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
-import { UserData } from '@/constants/interface';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,10 +15,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.action';
+import { useOrganization } from '@clerk/nextjs';
 
 const PostThread = ({ userId }: { userId: string }) => {
   const router = useRouter();
   const pathname = usePathname();
+
+  const organization = useOrganization();
+
+  console.log(organization);
 
   const form = useForm({
     resolver: zodResolver(ThreadValidation),

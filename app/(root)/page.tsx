@@ -1,9 +1,8 @@
 import ThreadCard from '@/components/cards/ThreadCard';
 import { fetchThreads } from '@/lib/actions/thread.action';
-import { UserButton, currentUser } from '@clerk/nextjs';
-import Image from 'next/image';
+import { currentUser } from '@clerk/nextjs';
 
-const Home = async () => {
+const Page = async () => {
   const threadsData = await fetchThreads(1, 30);
   const threads = threadsData.threads;
   const user = await currentUser();
@@ -39,4 +38,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default Page;
