@@ -1,6 +1,6 @@
 import ThreadCard from '@/components/cards/ThreadCard';
 import Comment from '@/components/forms/Comment';
-import { fetchThreads, fetchThreadsById } from '@/lib/actions/thread.action';
+import { fetchThreadById } from '@/lib/actions/thread.action';
 import { fetchUser } from '@/lib/actions/user.action';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
@@ -13,7 +13,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const userInfo = await fetchUser(user.id);
   if (!userInfo.onboarded) redirect('/onboarding');
 
-  const thread = await fetchThreadsById(params.id);
+  const thread = await fetchThreadById(params.id);
 
   return (
     <section className="relative">
