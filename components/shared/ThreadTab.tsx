@@ -1,4 +1,4 @@
-import { ThreadProps, ThreadTabProps } from '@/constants/interface';
+import { ThreadTabProps } from '@/constants/interface';
 import { fetchUserThreads } from '@/lib/actions/user.action';
 import { redirect } from 'next/navigation';
 import ThreadCard from '../cards/ThreadCard';

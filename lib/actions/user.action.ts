@@ -54,7 +54,7 @@ const updateUser = async ({
   }
 };
 
-const fetchUserPosts = async (userId: string) => {
+const fetchUserThreads = async (userId: string) => {
   try {
     connectToDB();
 
@@ -170,4 +170,4 @@ const getActivity = async (userId: string) => {
   }
 };
 
-export { fetchUser, updateUser, fetchUserPosts, fetchUsers, getActivity };
+export { fetchUser, updateUser, fetchUserThreads, fetchUsers, getActivity };
