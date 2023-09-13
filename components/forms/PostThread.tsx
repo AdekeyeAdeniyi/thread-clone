@@ -16,7 +16,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.action';
 import { useOrganization } from '@clerk/nextjs';
-import { createCommunity } from '@/lib/actions/community.actions';
 
 const PostThread = ({ userId }: { userId: string }) => {
   const router = useRouter();

@@ -38,8 +38,6 @@ interface ThreadProps {
   _id?: string;
   key: string;
   id: string;
-  currentUserId?: string;
-  parentId: string | null;
   content: string;
   author: {
     name: string;
@@ -73,6 +71,7 @@ interface ProfileProps {
   username: string;
   imageUrl: string;
   bio: string;
+  type?: 'User' | 'Community';
 }
 interface ThreadTabProps {
   currentUserId: string;
@@ -89,6 +88,17 @@ interface UserCardProps {
   personType: string;
 }
 
+interface CommunityProps {
+  id: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  bio: string;
+  members: {
+    image: string;
+  }[];
+}
+
 export type {
   SidebarValue,
   GroupValue,
@@ -100,4 +110,5 @@ export type {
   ProfileProps,
   ThreadTabProps,
   UserCardProps,
+  CommunityProps,
 };

@@ -2,13 +2,20 @@ import { ThreadTabProps } from '@/constants/interface';
 import { fetchUserThreads } from '@/lib/actions/user.action';
 import { redirect } from 'next/navigation';
 import ThreadCard from '../cards/ThreadCard';
+import { fetchCommunityPosts } from '@/lib/actions/community.actions';
 
 const ThreadTab = async ({
   currentUserId,
   accountId,
   accountType,
 }: ThreadTabProps) => {
-  const threads = await fetchUserThreads(accountId);
+  let threads: any;
+
+  if (accountType === 'Community') {
+    threads = await fetchCommunityPosts(accountId);
+  } else {
+    threads = await fetchUserThreads(accountId);
+  }
 
   if (!threads) redirect('/');
 
@@ -18,9 +25,7 @@ const ThreadTab = async ({
         return (
           <ThreadCard
             key={thread._id}
-            id={thread.id}
-            currentUserId={accountId}
-            parentId={thread.parentId}
+            id={thread._id}
             content={thread.text}
             author={
               accountType === 'User'
@@ -30,9 +35,9 @@ const ThreadTab = async ({
                     image: threads.image,
                   }
                 : {
-                    id: threads.author.id,
-                    name: threads.author.name,
-                    image: threads.author.image,
+                    id: thread.author.id,
+                    name: thread.author.name,
+                    image: thread.author.image,
                   }
             }
             community={thread.community}

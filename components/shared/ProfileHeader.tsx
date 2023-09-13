@@ -8,6 +8,7 @@ const ProfileHeader = ({
   username,
   imageUrl,
   bio,
+  type,
 }: ProfileProps) => {
   return (
     <div className="flex-w-full flex-col justify-center">
