@@ -16,13 +16,14 @@ const UserCard = ({
   return (
     <article key={key} className="user-card">
       <div className="user-card_avatar">
-        <Image
-          src={imgUrl}
-          alt="Profile image"
-          width={48}
-          height={48}
-          className="rounded-full"
-        />
+        <div className="relative h-14 w-14 object-cover">
+          <Image
+            src={imgUrl}
+            alt="Profile image"
+            fill
+            className="rounded-full object-cover"
+          />
+        </div>
 
         <div className="flex-1 text-ellipsis">
           <h4 className="text-base-semibold text-light-1">{name}</h4>
@@ -32,7 +33,11 @@ const UserCard = ({
 
       <Button
         className="user-card_btn"
-        onClick={() => router.push(`profile/${id}`)}
+        onClick={
+          personType == 'Community'
+            ? () => router.push(`communities/${id}`)
+            : () => router.push(`profile/${id}`)
+        }
       >
         View
       </Button>

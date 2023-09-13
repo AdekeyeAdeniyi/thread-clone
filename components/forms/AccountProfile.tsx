@@ -19,17 +19,17 @@ import * as z from 'zod';
 import Image from 'next/image';
 import { isBase64Image } from '@/lib/utils';
 import { useUploadThing } from '@/lib/uploadthing';
-import { updateUser } from '@/lib/actions/user.action';
 import { usePathname, useRouter } from 'next/navigation';
+import { updateUser } from '@/lib/actions/user.action';
 
 interface Props {
-  user: UserData;
+  currentUser: UserData;
   btnTitle: string;
 }
 
-const AccountProfile = ({ user, btnTitle }: Props) => {
+const AccountProfile = ({ currentUser, btnTitle }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
-  const { startUpload } = useUploadThing('media');
+  const { startUpload } = useUploadThing('imageUploader');
 
   const router = useRouter();
   const pathname = usePathname();
@@ -37,10 +37,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      profile_photo: user?.image || '',
-      name: user?.name || '',
-      username: user?.username || '',
-      bio: user?.bio || '',
+      profile_photo: currentUser?.image || '',
+      name: currentUser?.name || '',
+      username: currentUser?.username || '',
+      bio: currentUser?.bio || '',
     },
   });
 
@@ -80,7 +80,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
 
     await updateUser({
-      userId: user.id || '',
+      userId: currentUser.id || '',
       username: values.username,
       name: values.name,
       bio: values.bio,
@@ -196,7 +196,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           )}
         />
         <Button type="submit" className="bg-primary-500">
-          Submit
+          {btnTitle}
         </Button>
       </form>
     </Form>

@@ -38,6 +38,8 @@ interface ThreadProps {
   _id?: string;
   key: string;
   id: string;
+  currentUserId?: string;
+  parentId: string;
   content: string;
   author: {
     name: string;
@@ -98,6 +100,12 @@ interface CommunityProps {
     image: string;
   }[];
 }
+interface CommentThread {
+  threadId: string;
+  commentText: string;
+  userId: string;
+  path: string;
+}
 
 export type {
   SidebarValue,
@@ -111,4 +119,5 @@ export type {
   ThreadTabProps,
   UserCardProps,
   CommunityProps,
+  CommentThread,
 };

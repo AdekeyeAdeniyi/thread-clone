@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const ThreadCard = ({
-  key,
   id,
   content,
   author,
@@ -18,7 +17,6 @@ const ThreadCard = ({
       className={`flex w-full flex-col rounded-xl ${
         isComment ? 'px-0 xs:px-7 bg' : 'bg-dark-2 p-7'
       }`}
-      key={key}
     >
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
@@ -67,13 +65,13 @@ const ThreadCard = ({
                   height={24}
                   className="cursor-pointer object-contain"
                 />
-                <Image
+                {/* <Image
                   src="/assets/share.svg"
                   alt="share"
                   width={24}
                   height={24}
                   className="cursor-pointer object-contain"
-                />
+                /> */}
               </div>
 
               {isComment && comments.length > 0 && (
@@ -89,11 +87,11 @@ const ThreadCard = ({
       </div>
       {!isComment && community && (
         <Link
-          href={`/communities/${community.id}`}
+          href={`/community/${community.id}`}
           className="mt-5 flex items-center"
         >
           <p className="text-subtle text-gray-1">
-            {formatDateString(createdAt)} - {community.name} Community
+            {formatDateString(createdAt)}-{community.name} Community
           </p>
           <Image
             src={community.image}
@@ -103,6 +101,27 @@ const ThreadCard = ({
             className="ml-1 rounded-full"
           />
         </Link>
+      )}
+
+      {!isComment && !community && comments.length > 0 && (
+        <div className="ml-1 mt-3 flex items-center gap-2">
+          {comments.slice(0, 2).map((comment, index) => (
+            <Image
+              key={index}
+              src={comment.author.image}
+              alt={`user_${index}`}
+              width={24}
+              height={24}
+              className={`${index !== 0 && '-ml-5'} rounded-full object-cover`}
+            />
+          ))}
+
+          <Link href={`/thread/${id}`}>
+            <p className="mt-1 text-subtle-medium text-gray-1">
+              {comments.length} repl{comments.length > 1 ? 'ies' : 'y'}
+            </p>
+          </Link>
+        </div>
       )}
     </article>
   );

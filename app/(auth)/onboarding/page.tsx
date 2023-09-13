@@ -28,7 +28,7 @@ const page = async () => {
       </p>
 
       <section className="mt-9 bg-dark-1 p-10">
-        <AccountProfile user={userData} btnTitle="Continue" />
+        <AccountProfile currentUser={userData} btnTitle="Continue" />
       </section>
     </main>
   );

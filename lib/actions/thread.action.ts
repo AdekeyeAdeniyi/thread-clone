@@ -5,7 +5,7 @@ import User from '../models/user.model';
 import Thread from '../models/thread.model';
 import Community from '../models/community.model';
 import connectToDB from '../mongoose';
-import { ThreadParams } from '@/constants/interface';
+import { CommentThread, ThreadParams } from '@/constants/interface';
 
 const fetchThreads = async (pageNumber = 1, pageSize = 20) => {
   connectToDB();
@@ -196,12 +196,12 @@ const fetchThreadById = async (threadId: string) => {
   }
 };
 
-const addCommentToThread = async (
-  threadId: string,
-  commentText: string,
-  userId: string,
-  path: string
-) => {
+const addCommentToThread = async ({
+  threadId,
+  commentText,
+  userId,
+  path,
+}: CommentThread) => {
   connectToDB();
 
   try {

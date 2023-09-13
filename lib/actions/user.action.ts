@@ -106,7 +106,7 @@ const fetchUsers = async ({
     const skipAmount = (pageNumber - 1) * pageSize;
 
     // Create a case-insensitive regular expression for the provided search string.
-    const regex = new RegExp(searchString, 'i');
+    const regex = new RegExp(`^${searchString}`, 'i');
 
     // Create an initial query object to filter users.
     const query: FilterQuery<typeof User> = {

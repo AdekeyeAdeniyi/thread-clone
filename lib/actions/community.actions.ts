@@ -125,7 +125,7 @@ const fetchCommunities = async ({
     const skipAmount = (pageNumber - 1) * pageSize;
 
     // Create a case-insensitive regular expression for the provided search string.
-    const regex = new RegExp(searchString, 'i');
+    const regex = new RegExp(`^${searchString}`, 'i');
 
     // Create an initial query object to filter communities.
     const query: FilterQuery<typeof Community> = {};
@@ -146,7 +146,8 @@ const fetchCommunities = async ({
       .sort(sortOptions)
       .skip(skipAmount)
       .limit(pageSize)
-      .populate('members');
+      .populate('members')
+      .populate('createdBy');
 
     // Count the total number of communities that match the search criteria (without pagination).
     const totalCommunitiesCount = await Community.countDocuments(query);
