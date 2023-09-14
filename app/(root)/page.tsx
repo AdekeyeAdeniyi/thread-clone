@@ -28,7 +28,7 @@ const Page = async () => {
                   content={thread.text}
                   author={thread.author}
                   community={thread.community}
-                  isLiked={state}
+                  isLiked={false}
                   createdAt={thread.createdAt}
                   comments={thread.children}
                 />

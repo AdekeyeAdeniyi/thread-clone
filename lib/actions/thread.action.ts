@@ -262,16 +262,18 @@ const toggleThreadLike = async ({
   path: string;
 }) => {
   try {
-    const originalThread = await fetchThreadById(threadId);
-    const User = await fetchUser(userId);
-    if (actionType) {
-      await originalThread.updateOne({ $pull: { liked: User._id } });
-    } else {
-      originalThread.liked.push(User._id);
-      await originalThread.save();
-    }
+    if (userId) {
+      const originalThread = await fetchThreadById(threadId);
+      const User = await fetchUser(userId);
+      if (actionType) {
+        await originalThread.updateOne({ $pull: { liked: User._id } });
+      } else {
+        originalThread.liked.push(User._id);
+        await originalThread.save();
+      }
 
-    revalidatePath(path);
+      revalidatePath(path);
+    }
   } catch (error) {}
 };
 

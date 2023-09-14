@@ -21,7 +21,7 @@ const ThreadCard = async ({
     'use server';
     await toggleThreadLike({
       threadId: id,
-      userId: user?.id ? user.id : '',
+      userId: user ? user?.id : '',
       actionType: state,
       path: pathname,
     });
