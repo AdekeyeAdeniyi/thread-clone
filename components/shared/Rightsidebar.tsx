@@ -4,7 +4,7 @@ import UserCard from '../cards/UserCard';
 import { currentUser } from '@clerk/nextjs';
 
 const Rightsidebar = async () => {
-  const suggestedCommunities = await fetchCommunities({ searchString: '' });
+  const suggestedCommunities = await fetchCommunities({ searchString: ' ' });
   const user = await currentUser();
 
   return (
