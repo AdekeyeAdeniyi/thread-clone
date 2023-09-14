@@ -13,7 +13,6 @@ const LikeThread = ({ likeState, onLikeState }: LikeThreadProps) => {
   return (
     <button
       onClick={() => {
-        console.log(user);
         user && setLike((prev) => !prev);
         user && onLikeState(likeState, pathname);
       }}
