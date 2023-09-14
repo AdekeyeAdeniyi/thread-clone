@@ -15,20 +15,23 @@ const Rightsidebar = async () => {
         </h3>
 
         <div className="mt-7 flex w-[350px] flex-col gap-9">
-          {suggestedCommunities.communities.length > 1 ? (
+          {suggestedCommunities.communities.length > 0 ? (
             <>
-              {suggestedCommunities.communities.map(
-                (community) =>
-                  community.createdBy.id !== user?.id && (
-                    <UserCard
-                      key={community.id}
-                      id={community.id}
-                      name={community.name}
-                      username={community.username}
-                      imgUrl={community.image}
-                      personType="Community"
-                    />
-                  )
+              {suggestedCommunities.communities.map((community) =>
+                community.createdBy.id !== user?.id ? (
+                  <UserCard
+                    key={community.id}
+                    id={community.id}
+                    name={community.name}
+                    username={community.username}
+                    imgUrl={community.image}
+                    personType="Community"
+                  />
+                ) : (
+                  <p className="!text-base-regular text-light-3">
+                    No communities yet
+                  </p>
+                )
               )}
             </>
           ) : (
