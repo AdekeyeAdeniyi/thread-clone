@@ -1,18 +1,21 @@
 'use client';
 import { LikeThreadProps } from '@/constants/interface';
+import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 const LikeThread = ({ likeState, onLikeState }: LikeThreadProps) => {
   const [like, setLike] = useState(likeState);
   const pathname = usePathname();
+  const { user } = useUser();
 
   return (
     <button
       onClick={() => {
-        setLike((prev) => !prev);
-        onLikeState(likeState, pathname);
+        console.log(user);
+        user && setLike((prev) => !prev);
+        user && onLikeState(likeState, pathname);
       }}
     >
       <Image
