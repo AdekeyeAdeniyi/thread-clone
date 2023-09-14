@@ -2,6 +2,7 @@ import ThreadCard from '@/components/cards/ThreadCard';
 import Comment from '@/components/forms/Comment';
 import { fetchThreadById } from '@/lib/actions/thread.action';
 import { fetchUser } from '@/lib/actions/user.action';
+import { isMatch } from '@/lib/utils';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
@@ -14,6 +15,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!userInfo.onboarded) redirect('/onboarding');
 
   const thread = await fetchThreadById(params.id);
+  const state = isMatch(thread.liked, user.id);
 
   return (
     <section className="relative">
@@ -26,6 +28,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           content={thread.text}
           author={thread.author}
           community={thread.community}
+          isLiked={state}
           createdAt={thread.createdAt}
           comments={thread.children}
         />
@@ -41,6 +44,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
       <div className="mt-10">
         {thread.children.map((comment: any) => {
+          const state = isMatch(comment.liked, user.id);
           return (
             <ThreadCard
               key={comment._id}
@@ -49,6 +53,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
               parentId={comment.parentId}
               content={comment.text}
               author={comment.author}
+              isLiked={state}
               community={comment.community}
               createdAt={comment.createdAt}
               comments={comment.children}

@@ -15,7 +15,7 @@ const Rightsidebar = async () => {
         </h3>
 
         <div className="mt-7 flex w-[350px] flex-col gap-9">
-          {suggestedCommunities.communities.length > 0 ? (
+          {suggestedCommunities.communities.length > 1 ? (
             <>
               {suggestedCommunities.communities.map(
                 (community) =>

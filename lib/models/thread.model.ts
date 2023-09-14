@@ -24,6 +24,12 @@ const threadScheme = new Schema({
       ref: 'Thread',
     },
   ],
+  liked: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
 });
 
 const Thread = models.Thread || model('Thread', threadScheme);

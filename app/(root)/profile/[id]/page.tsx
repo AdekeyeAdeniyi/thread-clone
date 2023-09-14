@@ -56,11 +56,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 value={tab.value}
                 className="w-full text-light-1"
               >
-                <ThreadTab
-                  currentUserId={user.id}
-                  accountId={userInfo.id}
-                  accountType="User"
-                />
+                <ThreadTab accountId={userInfo.id} accountType="User" />
               </TabsContent>
             );
           })}

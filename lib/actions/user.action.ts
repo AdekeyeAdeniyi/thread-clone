@@ -77,6 +77,11 @@ const fetchUserThreads = async (userId: string) => {
             select: 'name image id', // Select the "name" and "_id" fields from the "User" model
           },
         },
+        {
+          path: 'liked',
+          model: User,
+          select: 'id',
+        },
       ],
     });
     return threads;

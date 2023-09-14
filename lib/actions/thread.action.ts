@@ -6,6 +6,7 @@ import Thread from '../models/thread.model';
 import Community from '../models/community.model';
 import connectToDB from '../mongoose';
 import { CommentThread, ThreadParams } from '@/constants/interface';
+import { fetchUser } from './user.action';
 
 const fetchThreads = async (pageNumber = 1, pageSize = 20) => {
   connectToDB();
@@ -33,8 +34,12 @@ const fetchThreads = async (pageNumber = 1, pageSize = 20) => {
         model: User,
         select: '_id name parentId image', // Select only _id and username fields of the author
       },
+    })
+    .populate({
+      path: 'liked',
+      model: User,
+      select: 'id',
     });
-
   // Count the total number of top-level posts (threads) i.e., threads that are not comments.
   const totalPostsCount = await Thread.countDocuments({
     parentId: { $in: [null, undefined] },
@@ -169,6 +174,11 @@ const fetchThreadById = async (threadId: string) => {
         select: '_id id name image',
       }) // Populate the community field with _id and name
       .populate({
+        path: 'liked',
+        model: User,
+        select: 'id',
+      })
+      .populate({
         path: 'children', // Populate the children field
         populate: [
           {
@@ -184,6 +194,11 @@ const fetchThreadById = async (threadId: string) => {
               model: User,
               select: '_id id name parentId image', // Select only _id and username fields of the author
             },
+          },
+          {
+            path: 'liked',
+            model: User,
+            select: 'id',
           },
         ],
       })
@@ -235,6 +250,31 @@ const addCommentToThread = async ({
   }
 };
 
+const toggleThreadLike = async ({
+  threadId,
+  userId,
+  actionType,
+  path,
+}: {
+  threadId: string;
+  userId: string;
+  actionType: boolean;
+  path: string;
+}) => {
+  try {
+    const originalThread = await fetchThreadById(threadId);
+    const User = await fetchUser(userId);
+    if (actionType) {
+      await originalThread.updateOne({ $pull: { liked: User._id } });
+    } else {
+      originalThread.liked.push(User._id);
+      await originalThread.save();
+    }
+
+    revalidatePath(path);
+  } catch (error) {}
+};
+
 export {
   fetchThreads,
   createThread,
@@ -242,4 +282,5 @@ export {
   deleteThread,
   fetchThreadById,
   addCommentToThread,
+  toggleThreadLike,
 };

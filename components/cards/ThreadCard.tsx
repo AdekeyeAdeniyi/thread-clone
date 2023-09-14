@@ -2,8 +2,11 @@ import { ThreadProps } from '@/constants/interface';
 import { formatDateString } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import LikeThread from '../shared/LikeComment';
+import { toggleThreadLike } from '@/lib/actions/thread.action';
+import { currentUser } from '@clerk/nextjs';
 
-const ThreadCard = ({
+const ThreadCard = async ({
   id,
   content,
   author,
@@ -11,7 +14,18 @@ const ThreadCard = ({
   createdAt,
   comments,
   isComment,
+  isLiked,
 }: ThreadProps) => {
+  const user = await currentUser();
+  const handleLike = async (state: boolean, pathname: string) => {
+    'use server';
+    await toggleThreadLike({
+      threadId: id,
+      userId: user?.id ? user.id : '',
+      actionType: state,
+      path: pathname,
+    });
+  };
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -42,13 +56,7 @@ const ThreadCard = ({
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
             <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
-                <Image
-                  src="/assets/heart-gray.svg"
-                  alt="heart"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain"
-                />
+                <LikeThread likeState={isLiked} onLikeState={handleLike} />
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
@@ -66,12 +74,12 @@ const ThreadCard = ({
                   className="cursor-pointer object-contain"
                 />
                 {/* <Image
-                  src="/assets/share.svg"
-                  alt="share"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain"
-                /> */}
+                    src="/assets/share.svg"
+                    alt="share"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer object-contain"
+                  /> */}
               </div>
 
               {isComment && comments.length > 0 && (
@@ -126,5 +134,4 @@ const ThreadCard = ({
     </article>
   );
 };
-
 export default ThreadCard;

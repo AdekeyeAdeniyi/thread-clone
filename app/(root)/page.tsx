@@ -1,5 +1,6 @@
 import ThreadCard from '@/components/cards/ThreadCard';
 import { fetchThreads } from '@/lib/actions/thread.action';
+import { isMatch } from '@/lib/utils';
 import { currentUser } from '@clerk/nextjs';
 
 const Page = async () => {
@@ -17,6 +18,7 @@ const Page = async () => {
         ) : (
           <>
             {threads.map((thread) => {
+              const state = isMatch(thread.liked, user?.id);
               return (
                 <ThreadCard
                   key={JSON.stringify(thread._id)}
@@ -26,6 +28,7 @@ const Page = async () => {
                   content={thread.text}
                   author={thread.author}
                   community={thread.community}
+                  isLiked={state}
                   createdAt={thread.createdAt}
                   comments={thread.children}
                 />

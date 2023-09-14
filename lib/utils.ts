@@ -41,3 +41,7 @@ export function formatThreadCount(count: number): string {
     return `${threadCount} ${threadWord}`;
   }
 }
+
+export const isMatch = (list: any, id?: string): boolean => {
+  return list.some((list: any) => list.id === id);
+};

@@ -39,7 +39,7 @@ interface ThreadProps {
   key: string;
   id: string;
   currentUserId?: string;
-  parentId: string;
+  parentId?: string;
   content: string;
   author: {
     name: string;
@@ -58,6 +58,7 @@ interface ThreadProps {
     };
   }[];
   isComment?: boolean;
+  isLiked: boolean;
 }
 
 interface CommentProps {
@@ -76,7 +77,6 @@ interface ProfileProps {
   type?: 'User' | 'Community';
 }
 interface ThreadTabProps {
-  currentUserId: string;
   accountId: string;
   accountType: string;
 }
@@ -107,6 +107,11 @@ interface CommentThread {
   path: string;
 }
 
+interface LikeThreadProps {
+  likeState: boolean;
+  onLikeState: (state: boolean, pathname: string) => void;
+}
+
 export type {
   SidebarValue,
   GroupValue,
@@ -120,4 +125,5 @@ export type {
   UserCardProps,
   CommunityProps,
   CommentThread,
+  LikeThreadProps,
 };
